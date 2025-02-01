@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Connect to Metamask</title>
+</head>
+<body>
+    <h1>Connect Your Wallet</h1>
+    <button id="connect">Connect Metamask</button>
+    <p id="status"></p>
+
+    <script>
+        const connectButton = document.getElementById('connect');
+        const status = document.getElementById('status');
+
+        connectButton.addEventListener('click', async () => {
+            if (window.ethereum) {
+                try {
+                    const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+                    status.innerText = `Connected: ${accounts[0]}`;
+                } catch (error) {
+                    status.innerText = 'Connection failed';
+                }
+            } else {
+                status.innerText = 'Metamask is not installed!';
+            }
+        });
+    </script>
+</body>
+</html>
